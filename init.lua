@@ -51,6 +51,54 @@ require('packer').startup(function(use)
             })
         end
     })
+
+    -- AI Shit
+    use {
+        'yetone/avante.nvim',
+        -- Trigger loading the plugin on demand (optional, can be removed if you want it to load immediately)
+        event = 'VeryLazy',
+        -- Always load the latest version (optional, can be removed if you want stable versions)
+        version = false,
+        -- Any specific options you want to pass
+        opts = {
+            -- Add options here
+        },
+        -- Run `make` after installation to build the plugin
+        run = 'make',
+        requires = {
+            { 'nvim-treesitter/nvim-treesitter' },
+            { 'stevearc/dressing.nvim' },
+            { 'nvim-lua/plenary.nvim' },
+            { 'MunifTanjim/nui.nvim' },
+            { 'nvim-tree/nvim-web-devicons', opt = true }, -- optional
+            { 'zbirenbaum/copilot.lua', opt = true }, -- optional
+
+            -- Optional dependency for image pasting
+            {
+                'HakonHarnes/img-clip.nvim',
+                event = 'VeryLazy',
+                opts = {
+                    default = {
+                        embed_image_as_base64 = false,
+                        prompt_for_file_name = false,
+                        drag_and_drop = {
+                            insert_mode = true,
+                        },
+                        use_absolute_path = true, -- required for Windows users
+                    },
+                },
+            },
+            -- Optional dependency for markdown rendering
+            {
+                'MeanderingProgrammer/render-markdown.nvim',
+                ft = { 'markdown', 'Avante' }, -- Load for specific file types
+                opts = {
+                    file_types = { 'markdown', 'Avante' },
+                },
+            },
+        },
+    }
+
     use {
         "supermaven-inc/supermaven-nvim",
         config = function()
